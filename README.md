@@ -39,3 +39,16 @@ with "nodemon app.js" you dont have to restart the server manually each time you
 a folder: "server" and inside (since you have 2 different routes, one for homepage, about, etc and the other for the admin panel) you create another folder "routes" with main routes for now
 
 - register that routes files in app.js
+
+---
+
+### MongoDB Connection
+
+- google "MongoDB Atlas"
+- sign in conveniently with your google account
+- create a new project
+- create a database for that project, thus choose the free tier and a server near to your location.
+- rename it from "cluster0" to "nodeblog" 
+- choose a username&password (save it in .env)
+ - finally you can add ip addresses that are allowed to connect to the projects clusters
+(you can manage them later on via the "network access page" which will be needed if you upload the project to a server, which ip address would be listed here, but for development purposes you can choose 0.0.0.0 (access from anywhere) or simply press the "add my current ip address" button)
