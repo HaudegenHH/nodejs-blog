@@ -51,4 +51,6 @@ a folder: "server" and inside (since you have 2 different routes, one for homepa
 - rename it from "cluster0" to "nodeblog" 
 - choose a username&password (save it in .env)
  - finally you can add ip addresses that are allowed to connect to the projects clusters
-(you can manage them later on via the "network access page" which will be needed if you upload the project to a server, which ip address would be listed here, but for development purposes you can choose 0.0.0.0 (access from anywhere) or simply press the "add my current ip address" button)
+(you can manage them later on via the "network access page" which will be needed if you upload the project to a server, which ip address would be listed here, but for development purposes you can choose 0.0.0.0 (access from anywhere) or simply press the "add my current ip address" button) -> hit finish
+- click "connect" and choose "Connecting with MongoDB for VS Code" (if you like you could utilize the vscode extension with that name, but its not neccessary)
+- copy the connection string and save it in .env (and use the pw you defined earlier)
