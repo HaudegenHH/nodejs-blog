@@ -54,3 +54,20 @@ a folder: "server" and inside (since you have 2 different routes, one for homepa
 (you can manage them later on via the "network access page" which will be needed if you upload the project to a server, which ip address would be listed here, but for development purposes you can choose 0.0.0.0 (access from anywhere) or simply press the "add my current ip address" button) -> hit finish
 - click "connect" and choose "Connecting with MongoDB for VS Code" (if you like you could utilize the vscode extension with that name, but its not neccessary)
 - copy the connection string and save it in .env (and use the pw you defined earlier)
+
+---
+
+## interaction with mongodb
+
+- to add sth to the database, you can do this via a route that you define for that purpose, or simply take the home route for that and the first thing would be to import the Post Model/Schema in routes/main.js to interact with the database via the Model
+- due to the small size of the project, I have refrained from creating controllers
+- after importing the model, you can use it to perform the common crud operations like read and insert data, update and delete
+- then for inserting dummy-data once you can write a function like "insertPostDummyData" where you perform this create-operation by using the Post-Model
+- Post.insertMany([{}]) takes an array of objects and since createdAt and updatedAt are created automatically, you just have to provide an array of objects (or rather: js object literals) with title and body and the id for each record will be created by mongodb as well.
+
+- ! if you want to create a collection called "blog" right away when inserting the test data once, you only need to add a /blog to the MongoDB connection string. (otherwise its name would be "test")
+
+- to retrieve the data afterwards on the home route, you simply have to make the callback async and inside a try-catch you could use the simplest method for retrieving the data: find()
+
+
+
