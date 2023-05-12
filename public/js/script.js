@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function(){
 
+    scrollDown();
+
     const allButtons = document.querySelectorAll('.searchBtn');
     const searchBar = document.querySelector('.searchBar');
     const searchInput = document.getElementById('searchInput');
     const searchClose = document.getElementById('searchClose');
+    const pagination = document.querySelectorAll('.pagination')
   
     for (var i = 0; i < allButtons.length; i++) {
       allButtons[i].addEventListener('click', function() {
@@ -18,6 +21,15 @@ document.addEventListener('DOMContentLoaded', function(){
       searchBar.style.visibility = 'hidden';
       searchBar.classList.remove('open');
       this.setAttribute('aria-expanded', 'false');
-    });  
+    });
   
-  });
+});
+
+function scrollDown() {
+  setTimeout(() => {
+    document.getElementById("articles-heading").scrollIntoView({
+      behavior: 'smooth'
+    });  
+  }, 500)  
+}
+

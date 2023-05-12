@@ -6,16 +6,31 @@
 <img src="/img/hero-image.webp" alt="person looking out of the window" class="hero-image" width="981" height="528">
 
 <section class="articles">
-    <h2 class="articles__heading">Latest Posts</h2>
+    <h2 class="articles__heading" id="articles-heading">Latest Posts</h2>
     <ul class="article-ul">
-        <li>
+        <!--li>
             <a href="">
                 <span>Post title</span>
                 <span class="article-list__date">Date</span>
             </a>
-        </li>
+        </li-->
+        
+        <% data.forEach(post => { %>
+            <li>
+                <a href="/post/<%= post._id %>">
+                    <span><%= post.title %></span>
+                    <span class="article-list__date"><%= post.createdAt.toDateString() %></span>
+                </a>
+            </li>            
+        <% }) %>
+        
     </ul>
 
-    <a href="#" class="pagination">&lt; View older posts</a>
+    <% if (nextPage !== null) { %>
+        <a href="/?page=<%= nextPage %>" class="pagination">&gt; View older posts</a> 
+    <% } else { %>
+        <a href="/?page=<%= current - 1 %>" class="pagination">&lt; Newer posts</a> 
+    <% } %>
+
 
 </section>
