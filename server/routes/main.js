@@ -4,17 +4,18 @@ const router = express.Router()
 // import post model
 const Post = require('../models/Post')
 
+// passing data to the page / ejs template engine
+const locals = {
+    title: "NodeJS Blog",
+    desc: "simple blog with node, express and mongodb"
+}
+
 // routes
 
 // Home route
 router.get('', async (req, res) => {
-    // passing data to the page / ejs template engine
-    const locals = {
-        title: "NodeJS Blog",
-        desc: "simple blog with node, express and mongodb"
-    }
-    
-    // call this fn it once then comment it out again
+   
+    // call this fn once then comment it out again
     //insertPostDummyData();
 
     // fetching the data from the blog collection
@@ -52,11 +53,53 @@ router.get('', async (req, res) => {
 
 // details page with a single post 
 router.get('/post/:id', async (req, res) => {
-    let id = req.params.id
 
-    const post = await Post.findById(id)
+    try {
+        let id = req.params.id
+        const post = await Post.findById(id)
+        res.render('details', {locals, post})        
+    } catch (error) {
+        console.log(error);
+    }
 
-    res.render('details', {post})
+})
+// details page with a single post 
+router.get('/post/:id', async (req, res) => {
+
+    try {
+        let id = req.params.id
+        const post = await Post.findById(id)
+        res.render('details', {locals, post})        
+    } catch (error) {
+        console.log(error);
+    }
+
+})
+
+// search  
+router.post('/search', async (req, res) => {
+
+    try {
+        let searchTerm = req.body.searchTerm
+        // console.log(searchTerm);
+        // sanitize the searchTerm by removing specialchars
+        const searchNoSpecialChar = searchTerm.replace(/[a-zA-Z0-9]/g, "")
+
+        // search with mongoose by using regex
+        const data = await Post.find({
+            $or: [
+                { title: { $regex: new RegExp(searchNoSpecialChar, 'i') }},
+                { body: { $regex: new RegExp(searchNoSpecialChar, 'i') }}
+            ]   
+        })
+        res.render("search", {
+            locals, 
+            data
+        })        
+    } catch (error) {
+        console.log(error);
+    }
+
 })
 
 function insertPostDummyData() {
