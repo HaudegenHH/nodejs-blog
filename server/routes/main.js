@@ -10,7 +10,8 @@ const locals = {
     desc: "simple blog with node, express and mongodb"
 }
 
-// routes
+
+// *************************************************************
 
 // Home route
 router.get('', async (req, res) => {
