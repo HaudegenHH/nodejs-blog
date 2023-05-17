@@ -63,18 +63,6 @@ router.get('/post/:id', async (req, res) => {
     }
 
 })
-// details page with a single post 
-router.get('/post/:id', async (req, res) => {
-
-    try {
-        let id = req.params.id
-        const post = await Post.findById(id)
-        res.render('details', {locals, post})        
-    } catch (error) {
-        console.log(error);
-    }
-
-})
 
 // search  
 router.post('/search', async (req, res) => {

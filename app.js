@@ -27,6 +27,7 @@ app.set('view engine', 'ejs')
 
 // register routes
 app.use('/', require('./server/routes/main'))
+app.use('/', require('./server/routes/admin'))
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port: http://localhost:${PORT}`)
