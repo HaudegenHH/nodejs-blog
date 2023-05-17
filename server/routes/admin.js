@@ -19,6 +19,25 @@ const adminLayout = '../views/layouts/admin'
 
 // *************************************************************
 
+/**
+ * 
+ * Check Login
+*/
+const authMiddleware = (req, res, next ) => {
+    const token = req.cookies.token;
+  
+    if(!token) {
+      return res.status(401).json( { message: 'Unauthorized'} );
+    }
+  
+    try {
+      const decoded = jwt.verify(token, jwtSecret);
+      req.userId = decoded.userId;
+      next();
+    } catch(error) {
+      res.status(401).json( { message: 'Unauthorized'} );
+    }
+  }
 
 /**
  * GET
@@ -83,6 +102,8 @@ router.post('/admin', async (req, res) => {
         return res.status(401).json( { message: 'Invalid credentials' } );
       }
   
+      // cookie with the token inside will be stored in the browsers cookie store
+      // and will keep the user logged in 
       const token = jwt.sign({ userId: user._id}, jwtSecret );
       res.cookie('token', token, { httpOnly: true });
       res.redirect('/dashboard');
@@ -126,8 +147,9 @@ router.post('/register', async (req, res) => {
 /**
  * GET /
  * Admin Dashboard
+ * protected with authMiddleware, which checks if there is a valid token
 */
-router.get('/dashboard', /*authMiddleware,*/ async (req, res) => {
+router.get('/dashboard', authMiddleware, async (req, res) => {
     try {
       const locals = {
         title: 'Dashboard',
