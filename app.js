@@ -8,6 +8,9 @@ const methodOverride = require('method-override')
 // helping with storing&reading the cookies..
 const cookieParser = require('cookie-parser')
 const session = require('express-session');
+
+const { isActiveRoute } = require('./server/helpers/routeHelpers')
+
 // ..and important for MongoDB session store
 const MongoStore = require('connect-mongo')
 
@@ -49,6 +52,9 @@ app.use(express.static('public'))
 app.use(expressLayout)
 app.set('layout', './layouts/main')
 app.set('view engine', 'ejs')
+
+// set global variable
+app.locals.isActiveRoute = isActiveRoute
 
 // register routes
 app.use('/', require('./server/routes/main'))

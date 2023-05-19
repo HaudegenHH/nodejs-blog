@@ -43,7 +43,8 @@ router.get('', async (req, res) => {
             locals, 
             data,
             current: page, 
-            nextPage: hasNextPage ? nextPage : null
+            nextPage: hasNextPage ? nextPage : null,
+            currentRoute: '/'
         })
     } catch (error) {
         console.log(error);
@@ -57,8 +58,18 @@ router.get('/post/:id', async (req, res) => {
 
     try {
         let id = req.params.id
+
+        const locals = {
+            title: "NodeJS Blog",
+            desc: "simple blog with node, express and mongodb"
+        }
+
         const post = await Post.findById(id)
-        res.render('details', {locals, post})        
+        res.render('details', {
+            locals, 
+            post, 
+            currentRoute: `/post/${id}` 
+        })        
     } catch (error) {
         console.log(error);
     }
@@ -83,7 +94,7 @@ router.post('/search', async (req, res) => {
         })
         res.render("search", {
             locals, 
-            data
+            data            
         })        
     } catch (error) {
         console.log(error);
@@ -125,10 +136,14 @@ function insertPostDummyData() {
 }
 
 router.get('/about', (req, res) => {
-    res.render('about')
+    res.render('about', {
+        currentRoute: '/about'
+    })
 })
 router.get('/contact', (req, res) => {
-    res.render('contact')
+    res.render('contact', {
+        currentRoute: '/contact'
+    })
 })
 
 module.exports = router
