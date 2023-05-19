@@ -275,4 +275,15 @@ router.delete('/delete-post/:id', authMiddleware, async (req, res) => {
   }
 });
 
+
+/**
+ * GET 
+ * Admin Logout
+*/
+router.get('/logout', authMiddleware, async (req, res) => {
+  res.clearCookie('token')
+  //res.status(200).json({message: 'Logout successful'})
+  res.redirect('/')
+});
+
 module.exports = router
