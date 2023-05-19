@@ -3,6 +3,8 @@ require('dotenv').config()
 const express = require('express')
 const expressLayout = require('express-ejs-layouts')
 
+const methodOverride = require('method-override')
+
 // helping with storing&reading the cookies..
 const cookieParser = require('cookie-parser')
 const session = require('express-session');
@@ -22,6 +24,9 @@ app.use(express.json())
 
 // adding cookie parser as middleware
 app.use(cookieParser())
+
+// method override for put and delete requests
+app.use(methodOverride('_method'))
 
 // and for the sessions
 app.use(session({

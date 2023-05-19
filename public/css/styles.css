@@ -5,6 +5,9 @@
   --gray: #7E7E7E;
   --gray-light: #E4E4E4;
   --red: #b30000;
+  --red-dark: #6b0000;
+  --green-light: #1db11a;
+  --green-dark: #137412;
   --font-size-base: 1rem;
   --font-size-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
   --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
@@ -67,11 +70,34 @@ input.btn {
   color: var(--gray-light);
 }
 
-.btn-delete {
+input.btn.btn-delete {
   padding: 10px 16px;
   background-color: var(--red);
+  color: white;
+  transition: all 0.3s ease;
 }
 
+input.btn.btn-delete:hover {
+  background-color: var(--red-dark);
+  color: white;
+}
+
+input.btn.btn-update {
+  background-color: var(--green-light);
+  border: none;
+  color: white; 
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 5px 2px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input.btn.btn-update:hover {
+  background-color: var(--green-dark);
+  color: #eee;
+}
 
 img {
   width: 100%;
